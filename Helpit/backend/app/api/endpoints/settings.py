@@ -1,20 +1,24 @@
 import os
 import base64
 import uuid
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import FileResponse
-from app.core.db import read_json_db, write_json_db, DATA_DIR
+from pydantic import BaseModel
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+
+from app.core.database import get_db
+from app.api.deps import get_default_business
+from app.models.models import Settings as DBSettings
+from app.core.db import DATA_DIR # reuse LOGO_DIR logic
 
 router = APIRouter()
 
 LOGO_DIR = os.path.join(DATA_DIR, "logos")
 os.makedirs(LOGO_DIR, exist_ok=True)
-
 API_BASE = "http://localhost:8000"
 
-
 def save_logo_file(data_url: str) -> str:
-    """Save a base64 data URL to a file and return the filename."""
     try:
         header, encoded = data_url.split(",", 1)
         ext = "png"
@@ -30,29 +34,6 @@ def save_logo_file(data_url: str) -> str:
     except Exception:
         return ""
 
-
-@router.get("/")
-def get_settings():
-    data = read_json_db("settings.json")
-    if not data:
-        data = {}
-    # If logo is a stored filename, convert to full URL
-    logo = data.get("business_logo", "")
-    if logo and not logo.startswith("http") and not logo.startswith("data:"):
-        data["business_logo"] = f"{API_BASE}/api/settings/logo/{logo}"
-    return data
-
-
-@router.get("/logo/{filename}")
-def get_logo(filename: str):
-    filepath = os.path.join(LOGO_DIR, filename)
-    if os.path.exists(filepath):
-        return FileResponse(filepath)
-    return {"error": "Logo not found"}
-
-
-from pydantic import BaseModel
-
 class SettingsUpdate(BaseModel):
     business_name: str = ""
     business_email: str = ""
@@ -65,22 +46,95 @@ class SettingsUpdate(BaseModel):
     smtp_port: int = 587
     smtp_user: str = ""
     smtp_password: str = ""
+    
+    # New payment configurations
+    easypaisa_config: dict = {}
+    jazzcash_config: dict = {}
+    bank_config: dict = {}
+
+@router.get("/")
+async def get_settings(db: AsyncSession = Depends(get_db), business = Depends(get_default_business)):
+    result = await db.execute(select(DBSettings).where(DBSettings.business_id == business.id))
+    settings = result.scalars().first()
+    
+    data = {
+        "business_name": business.name,
+        "business_email": business.email or "",
+        "business_logo": business.logo or "",
+        "business_phone": business.phone or "",
+        "business_address": business.address or "",
+        "business_tax_number": business.tax_number or "",
+        "default_terms": business.default_terms or "",
+    }
+    
+    if settings:
+        data.update({
+            "smtp_host": settings.smtp_host or "",
+            "smtp_port": settings.smtp_port or 587,
+            "smtp_user": settings.smtp_user or "",
+            "smtp_password": settings.smtp_password or "",
+            "easypaisa_config": settings.easypaisa_config or {},
+            "jazzcash_config": settings.jazzcash_config or {},
+            "bank_config": settings.bank_config or {},
+        })
+    else:
+        # Create default empty settings if not exist
+        settings = DBSettings(business_id=business.id)
+        db.add(settings)
+        await db.commit()
+        data.update({
+            "smtp_host": "", "smtp_port": 587, "smtp_user": "", "smtp_password": "",
+            "easypaisa_config": {}, "jazzcash_config": {}, "bank_config": {}
+        })
+
+    logo = data.get("business_logo", "")
+    if logo and not logo.startswith("http") and not logo.startswith("data:"):
+        data["business_logo"] = f"{API_BASE}/api/settings/logo/{logo}"
+
+    return data
+
+@router.get("/logo/{filename}")
+def get_logo(filename: str):
+    filepath = os.path.join(LOGO_DIR, filename)
+    if os.path.exists(filepath):
+        return FileResponse(filepath)
+    return {"error": "Logo not found"}
 
 @router.post("/")
-async def update_settings(settings: SettingsUpdate):
-    body = settings.dict()
-    logo_value = body.get("business_logo", "")
+async def update_settings(payload: SettingsUpdate, db: AsyncSession = Depends(get_db), business = Depends(get_default_business)):
+    logo_value = payload.business_logo
 
-    # If it's a base64 data URL, save to disk and store filename
     if logo_value and logo_value.startswith("data:"):
         filename = save_logo_file(logo_value)
         if filename:
-            body["business_logo"] = filename
+            logo_value = filename
         else:
-            body["business_logo"] = ""
+            logo_value = ""
     elif logo_value and logo_value.startswith(f"{API_BASE}/api/settings/logo/"):
-        # Strip the base URL back to just the filename for storage
-        body["business_logo"] = logo_value.replace(f"{API_BASE}/api/settings/logo/", "")
+        logo_value = logo_value.replace(f"{API_BASE}/api/settings/logo/", "")
 
-    write_json_db("settings.json", body)
-    return {"status": "success", "data": body}
+    business.name = payload.business_name
+    business.email = payload.business_email
+    business.logo = logo_value
+    business.phone = payload.business_phone
+    business.address = payload.business_address
+    business.tax_number = payload.business_tax_number
+    business.default_terms = payload.default_terms
+
+    result = await db.execute(select(DBSettings).where(DBSettings.business_id == business.id))
+    settings = result.scalars().first()
+    if not settings:
+        settings = DBSettings(business_id=business.id)
+        db.add(settings)
+        
+    settings.smtp_host = payload.smtp_host
+    settings.smtp_port = payload.smtp_port
+    settings.smtp_user = payload.smtp_user
+    settings.smtp_password = payload.smtp_password
+    settings.easypaisa_config = payload.easypaisa_config
+    settings.jazzcash_config = payload.jazzcash_config
+    settings.bank_config = payload.bank_config
+
+    await db.commit()
+    
+    return {"status": "success", "data": payload.dict()}

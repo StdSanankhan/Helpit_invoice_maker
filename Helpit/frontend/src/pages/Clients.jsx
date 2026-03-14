@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Plus, Mail, Phone, MapPin, Building, Trash2, Edit2, AlertCircle } from 'lucide-react';
+import { Users, Plus, Mail, Phone, MapPin, Building, Trash2, Edit2, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const Clients = () => {
     const [clients, setClients] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentClient, setCurrentClient] = useState({ name: '', company: '', email: '', phone: '', address: '' });
     const [loading, setLoading] = useState(true);
-    const [message, setMessage] = useState(null);
 
     const fetchClients = () => {
         setLoading(true);
@@ -18,6 +18,7 @@ const Clients = () => {
             })
             .catch(err => {
                 console.error("Failed to fetch clients:", err);
+                toast.error("Failed to fetch clients from server.");
                 setLoading(false);
             });
     };
@@ -33,12 +34,13 @@ const Clients = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-        setMessage(null);
         const isEditing = !!currentClient.id;
         const url = isEditing 
             ? `http://localhost:8000/api/clients/${currentClient.id}`
             : 'http://localhost:8000/api/clients/';
         const method = isEditing ? 'PUT' : 'POST';
+
+        const loadingToast = toast.loading(`${isEditing ? 'Updating' : 'Adding'} client...`);
 
         try {
             const res = await fetch(url, {
@@ -47,24 +49,30 @@ const Clients = () => {
                 body: JSON.stringify(currentClient)
             });
             if (res.ok) {
-                setMessage({ type: 'success', text: `Client successfully ${isEditing ? 'updated' : 'added'}!` });
+                toast.success(`Client successfully ${isEditing ? 'updated' : 'added'}!`, { id: loadingToast });
                 setIsModalOpen(false);
                 fetchClients();
             } else {
-                setMessage({ type: 'error', text: 'Failed to save client.' });
+                toast.error('Failed to save client.', { id: loadingToast });
             }
         } catch (err) {
-            setMessage({ type: 'error', text: 'Network error.' });
+            toast.error('Network error.', { id: loadingToast });
         }
     };
 
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this client?")) return;
+        const toastId = toast.loading("Deleting client...");
         try {
             const res = await fetch(`http://localhost:8000/api/clients/${id}`, { method: 'DELETE' });
-            if (res.ok) fetchClients();
+            if (res.ok) {
+                toast.success("Client deleted", { id: toastId });
+                fetchClients();
+            } else {
+                toast.error("Failed to delete client", { id: toastId });
+            }
         } catch (err) {
-            console.error(err);
+            toast.error("Network error.", { id: toastId });
         }
     };
 
@@ -90,22 +98,9 @@ const Clients = () => {
                 </button>
             </div>
 
-            {message && (
-                <div className={`p-4 rounded-xl flex items-center gap-3 ${message.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                    <AlertCircle className="w-5 h-5" />
-                    <p>{message.text}</p>
-                </div>
-            )}
-
             {loading ? (
-                <div className="animate-pulse flex space-x-4">
-                    <div className="flex-1 space-y-4 py-1">
-                        <div className="h-4 bg-white/10 rounded w-3/4"></div>
-                        <div className="space-y-2">
-                            <div className="h-4 bg-white/10 rounded"></div>
-                            <div className="h-4 bg-white/10 rounded w-5/6"></div>
-                        </div>
-                    </div>
+                <div className="flex justify-center items-center py-20">
+                    <Loader2 className="w-10 h-10 animate-spin text-neon" />
                 </div>
             ) : clients.length === 0 ? (
                 <div className="text-center py-20 glass rounded-2xl">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FileText, TrendingUp, Users, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { FileText, TrendingUp, Users, CheckCircle, Clock, AlertCircle, Zap, Shield } from 'lucide-react';
 
 const Dashboard = () => {
     const [stats, setStats] = useState({
@@ -11,6 +11,7 @@ const Dashboard = () => {
         recentInvoices: [],
         uniqueClients: 0
     });
+    const [subInfo, setSubInfo] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -44,6 +45,10 @@ const Dashboard = () => {
                     recentInvoices: sortedInvoices.slice(0, 5),
                     uniqueClients: clients.size
                 });
+
+                const subRes = await fetch('http://localhost:8000/api/subscriptions/status').then(r => r.json()).catch(() => null);
+                if (subRes) setSubInfo(subRes);
+                
             } catch (err) {
                 console.error("Failed to load dashboard data:", err);
             } finally {
@@ -79,8 +84,40 @@ const Dashboard = () => {
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto">
             <div className="flex justify-between items-end">
                 <div>
-                    <h1 className="text-3xl font-bold heading-gradient mb-2">Dashboard Overview</h1>
+                    <div className="flex items-center gap-3 mb-2">
+                        <h1 className="text-3xl font-bold heading-gradient">Dashboard Overview</h1>
+                        {subInfo?.plan === 'premium' && subInfo?.subscription_status === 'active' ? (
+                            <span className="bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 text-yellow-500 border border-yellow-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(234,179,8,0.2)] flex items-center gap-1">
+                                <Shield className="w-3 h-3" /> Premium
+                            </span>
+                        ) : subInfo?.subscription_status === 'pending' ? (
+                            <span className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Upgrade Pending</span>
+                        ) : subInfo?.subscription_status === 'expired' ? (
+                            <span className="bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Plan Expired</span>
+                        ) : (
+                            <span className="bg-gray-500/20 text-gray-400 border border-gray-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Free Plan</span>
+                        )}
+                    </div>
                     <p className="text-gray-400">Welcome back. Here's your business at a glance.</p>
+                    {/* Subscription details row */}
+                    {subInfo?.plan === 'premium' && subInfo?.subscription_expiry && (() => {
+                        const expiry = new Date(subInfo.subscription_expiry);
+                        const daysLeft = Math.ceil((expiry - new Date()) / (1000 * 60 * 60 * 24));
+                        const isExpiringSoon = daysLeft <= 7;
+                        return (
+                            <div className={`mt-2 inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full ${isExpiringSoon ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-green-500/10 text-green-400 border border-green-500/20'}`}>
+                                <Clock className="w-3 h-3" />
+                                Premium expires: {expiry.toLocaleDateString()}
+                                {isExpiringSoon && <span className="font-bold">({daysLeft} days left!)</span>}
+                            </div>
+                        );
+                    })()}
+                    {/* Free plan CTA */}
+                    {(!subInfo || subInfo.plan === 'free' || subInfo.subscription_status === 'expired') && (
+                        <NavLink to="/upgrade" className="mt-2 inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors">
+                            <Zap className="w-3 h-3" /> Upgrade to Premium
+                        </NavLink>
+                    )}
                 </div>
                 <div className="flex gap-4">
                     <NavLink to="/invoices/new" className="glass-button flex items-center gap-2 text-sm">

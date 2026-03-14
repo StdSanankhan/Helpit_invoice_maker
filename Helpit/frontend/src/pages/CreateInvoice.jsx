@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, FileText, Download, Send, AlertCircle, Save, CheckCircle } from 'lucide-react';
+import { Plus, Trash2, FileText, Download, Send, Save, CheckCircle } from 'lucide-react';
+import toast from 'react-hot-toast';
 import html2pdf from 'html2pdf.js';
+import PremiumGate from '../components/PremiumGate';
 
 const TEMPLATES = ['modern', 'corporate', 'minimal', 'creative'];
 
@@ -22,7 +24,7 @@ const CreateInvoice = () => {
     
     const [isSaving, setIsSaving] = useState(false);
     const [isEmailing, setIsEmailing] = useState(false);
-    const [message, setMessage] = useState(null);
+    const [userPlan, setUserPlan] = useState('free');
 
     useEffect(() => {
         // Fetch Settings
@@ -30,7 +32,23 @@ const CreateInvoice = () => {
             .then(res => res.json())
             .then(data => {
                 setSettings(data);
-                setInvoice(prev => ({ ...prev, notes: data.default_terms || '' }));
+                
+                let defaultNotes = data.default_terms || '';
+                
+                const enabledMethods = [];
+                if (data.payment_methods_enabled?.bank_transfer) enabledMethods.push("Bank Transfer");
+                if (data.payment_methods_enabled?.paypal) enabledMethods.push("PayPal");
+                if (data.payment_methods_enabled?.crypto) enabledMethods.push("Cryptocurrency");
+                
+                if (enabledMethods.length > 0) {
+                    defaultNotes += `\n\nAccepted Payment Methods: ${enabledMethods.join(', ')}`;
+                }
+                
+                if (data.payment_instructions) {
+                    defaultNotes += `\n\nPayment Instructions:\n${data.payment_instructions}`;
+                }
+                
+                setInvoice(prev => ({ ...prev, notes: defaultNotes.trim() }));
             })
             .catch(console.error);
             
@@ -38,6 +56,12 @@ const CreateInvoice = () => {
         fetch('http://localhost:8000/api/clients/')
             .then(res => res.json())
             .then(data => setClients(data))
+            .catch(console.error);
+
+        // Fetch user subscription plan
+        fetch('http://localhost:8000/api/subscriptions/status')
+            .then(res => res.json())
+            .then(data => { if (data?.plan) setUserPlan(data.plan); })
             .catch(console.error);
     }, []);
 
@@ -91,11 +115,11 @@ const CreateInvoice = () => {
 
     const handleSave = async () => {
         if (!invoice.client_id) {
-            setMessage({ type: 'error', text: 'Please select a client before saving.' });
+            toast.error('Please select a client before saving.');
             return;
         }
         setIsSaving(true);
-        setMessage(null);
+        const toastId = toast.loading('Saving invoice...');
         try {
             const payload = { ...invoice, total: grandTotal };
             const res = await fetch('http://localhost:8000/api/invoices/', {
@@ -106,12 +130,12 @@ const CreateInvoice = () => {
             if (res.ok) {
                 const data = await res.json();
                 setInvoice(prev => ({ ...prev, invoice_number: data.invoice_number, id: data.id }));
-                setMessage({ type: 'success', text: 'Invoice saved successfully!' });
+                toast.success('Invoice saved successfully!', { id: toastId });
             } else {
-                setMessage({ type: 'error', text: 'Failed to save invoice.' });
+                toast.error('Failed to save invoice.', { id: toastId });
             }
         } catch (err) {
-            setMessage({ type: 'error', text: 'Network error.' });
+            toast.error('Network error.', { id: toastId });
         } finally {
             setIsSaving(false);
         }
@@ -160,12 +184,12 @@ const CreateInvoice = () => {
 
     const handleSendEmail = async () => {
         if (!invoice.client_email || !invoice.id) {
-            setMessage({ type: 'error', text: 'Please save the invoice and ensure the client has an email address first.' });
+            toast.error('Please save the invoice and ensure the client has an email address first.');
             return;
         }
 
         setIsEmailing(true);
-        setMessage({ type: 'info', text: 'Generating PDF attachment...' });
+        const toastId = toast.loading('Generating PDF attachment...');
 
         try {
             // Generate PDF as base64
@@ -175,7 +199,7 @@ const CreateInvoice = () => {
                 throw new Error("Failed to generate PDF locally");
             }
 
-            setMessage({ type: 'info', text: 'Sending email...' });
+            toast.loading('Sending email...', { id: toastId });
 
             const payload = {
                 to_email: invoice.client_email,
@@ -192,15 +216,15 @@ const CreateInvoice = () => {
             });
 
             if (res.ok) {
-                setMessage({ type: 'success', text: 'Invoice email with PDF sent successfully!' });
+                toast.success('Invoice email with PDF sent successfully!', { id: toastId });
                 setInvoice(prev => ({ ...prev, status: 'Sent' })); // Auto update status visually
             } else {
                 const errData = await res.json();
-                setMessage({ type: 'error', text: errData.detail || 'Failed to send email.' });
+                toast.error(errData.detail || 'Failed to send email.', { id: toastId });
             }
         } catch (err) {
             console.error(err);
-            setMessage({ type: 'error', text: 'Error while generating/sending PDF via email.' });
+            toast.error('Error while generating/sending PDF via email.', { id: toastId });
         } finally {
             setIsEmailing(false);
         }
@@ -411,9 +435,11 @@ const CreateInvoice = () => {
                     <p className="text-gray-400">Generate a professional invoice, pick templates, and email to client.</p>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                    <button onClick={handleSendEmail} disabled={isEmailing} className="glass-button-secondary flex items-center gap-2 text-sm text-neon border-neon/30 hover:bg-neon/10">
-                        <Send className="w-4 h-4" /> {isEmailing ? 'Sending Email...' : 'Email to Client'}
-                    </button>
+                    <PremiumGate plan={userPlan} featureName="Email Invoice to Client">
+                        <button onClick={handleSendEmail} disabled={isEmailing} className="glass-button-secondary flex items-center gap-2 text-sm text-neon border-neon/30 hover:bg-neon/10">
+                            <Send className="w-4 h-4" /> {isEmailing ? 'Sending Email...' : 'Email to Client'}
+                        </button>
+                    </PremiumGate>
                     <button onClick={() => generatePDF(true)} className="glass-button-secondary flex items-center gap-2 text-sm text-blue-400 border-blue-400/30 hover:bg-blue-400/10">
                         <Download className="w-4 h-4" /> Download PDF
                     </button>
@@ -423,12 +449,7 @@ const CreateInvoice = () => {
                 </div>
             </div>
 
-            {message && (
-                <div className={`p-4 rounded-xl flex items-center gap-3 ${message.type === 'info' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : message.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                    <AlertCircle className="w-5 h-5" />
-                    <p>{message.text}</p>
-                </div>
-            )}
+
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                 {/* Editor Form */}

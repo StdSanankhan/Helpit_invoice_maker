@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Save, AlertCircle } from 'lucide-react';
+import { Save, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const Settings = () => {
     const [settings, setSettings] = useState({
@@ -9,11 +10,12 @@ const Settings = () => {
         business_phone: '',
         business_address: '',
         business_tax_number: '',
-        default_terms: ''
+        default_terms: '',
+        payment_methods_enabled: { bank_transfer: false, paypal: false, crypto: false },
+        payment_instructions: ''
     });
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
-    const [message, setMessage] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/api/settings/')
@@ -24,13 +26,26 @@ const Settings = () => {
             })
             .catch(err => {
                 console.error("Failed to fetch settings:", err);
+                toast.error("Failed to load settings from server.");
                 setIsLoading(false);
             });
     }, []);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setSettings(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        
+        if (name.startsWith('pm_')) {
+            const method = name.replace('pm_', '');
+            setSettings(prev => ({
+                ...prev,
+                payment_methods_enabled: {
+                    ...(prev.payment_methods_enabled || {}),
+                    [method]: checked
+                }
+            }));
+        } else {
+            setSettings(prev => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleLogoUpload = (e) => {
@@ -47,7 +62,7 @@ const Settings = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSaving(true);
-        setMessage(null);
+        const toastId = toast.loading('Saving settings...');
         try {
             const res = await fetch('http://localhost:8000/api/settings/', {
                 method: 'POST',
@@ -55,19 +70,23 @@ const Settings = () => {
                 body: JSON.stringify(settings)
             });
             if (res.ok) {
-                setMessage({ type: 'success', text: 'Settings saved successfully.' });
+                toast.success('Settings saved successfully.', { id: toastId });
             } else {
-                setMessage({ type: 'error', text: 'Failed to save settings.' });
+                toast.error('Failed to save settings.', { id: toastId });
             }
         } catch (err) {
-            setMessage({ type: 'error', text: 'Network error.' });
+            toast.error('Network error.', { id: toastId });
         } finally {
             setIsSaving(false);
         }
     };
 
     if (isLoading) {
-        return <div className="animate-pulse">Loading settings...</div>;
+        return (
+            <div className="flex justify-center items-center py-20">
+                <Loader2 className="w-10 h-10 animate-spin text-neon" />
+            </div>
+        );
     }
 
     return (
@@ -76,13 +95,6 @@ const Settings = () => {
                 <h1 className="text-3xl font-bold heading-gradient mb-2">Business Settings</h1>
                 <p className="text-gray-400">Configure your business profile to be used across invoices and contracts.</p>
             </div>
-
-            {message && (
-                <div className={`p-4 rounded-xl flex items-center gap-3 ${message.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                    <AlertCircle className="w-5 h-5" />
-                    <p>{message.text}</p>
-                </div>
-            )}
 
             <form onSubmit={handleSubmit} className="glass p-8 rounded-2xl space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -210,6 +222,7 @@ const Settings = () => {
                         placeholder="These terms will automatically appear on your invoices and contracts..."
                     />
                 </div>
+
 
                 <div className="pt-6 border-t border-white/10">
                     <h3 className="text-lg font-semibold text-white mb-4">Email (SMTP) Configuration</h3>
