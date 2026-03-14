@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { Save, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -18,7 +19,7 @@ const Settings = () => {
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/settings/')
+        fetch(`${API_URL}/api/settings/`)
             .then(res => res.json())
             .then(data => {
                 setSettings(data);
@@ -64,7 +65,7 @@ const Settings = () => {
         setIsSaving(true);
         const toastId = toast.loading('Saving settings...');
         try {
-            const res = await fetch('http://localhost:8000/api/settings/', {
+            const res = await fetch(`${API_URL}/api/settings/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(settings)
@@ -286,3 +287,6 @@ const Settings = () => {
 };
 
 export default Settings;
+
+
+

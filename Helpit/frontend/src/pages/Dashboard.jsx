@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FileText, TrendingUp, Users, CheckCircle, Clock, AlertCircle, Zap, Shield } from 'lucide-react';
@@ -17,7 +18,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const invRes = await fetch('http://localhost:8000/api/invoices/').then(r => r.json());
+                const invRes = await fetch(`${API_URL}/api/invoices/`).then(r => r.json());
                 
                 const sortedInvoices = [...invRes].sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
                 
@@ -46,7 +47,7 @@ const Dashboard = () => {
                     uniqueClients: clients.size
                 });
 
-                const subRes = await fetch('http://localhost:8000/api/subscriptions/status').then(r => r.json()).catch(() => null);
+                const subRes = await fetch(`${API_URL}/api/subscriptions/status`).then(r => r.json()).catch(() => null);
                 if (subRes) setSubInfo(subRes);
                 
             } catch (err) {
@@ -181,3 +182,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+

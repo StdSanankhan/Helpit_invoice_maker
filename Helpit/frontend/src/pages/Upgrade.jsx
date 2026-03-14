@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { Shield, Check, Upload, Loader2, CreditCard, ChevronRight, ChevronLeft, Zap, Smartphone } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -48,7 +49,7 @@ const Upgrade = () => {
   const [qrError, setQrError] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/settings/')
+    fetch(`${API_URL}/api/settings/`)
       .then(res => res.json())
       .then(data => { setSettings(data); setIsLoading(false); })
       .catch(() => { toast.error("Failed to load payment settings."); setIsLoading(false); });
@@ -72,7 +73,7 @@ const Upgrade = () => {
     form.append('proof', proof);
 
     try {
-      const res = await fetch('http://localhost:8000/api/subscriptions/upgrade', { method: 'POST', body: form });
+      const res = await fetch(`${API_URL}/api/subscriptions/upgrade`, { method: 'POST', body: form });
       const data = await res.json();
       if (res.ok) {
         toast.success(data.message || "Request submitted! Pending admin approval.", { id: toastId, duration: 6000 });
@@ -320,3 +321,6 @@ const Upgrade = () => {
 };
 
 export default Upgrade;
+
+
+

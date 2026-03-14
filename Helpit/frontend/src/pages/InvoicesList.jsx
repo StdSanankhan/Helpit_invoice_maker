@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FileText, Search, Plus, Filter, Play, Download } from 'lucide-react';
@@ -12,12 +13,12 @@ const InvoicesList = () => {
     const [downloadingInvoice, setDownloadingInvoice] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/settings/')
+        fetch(`${API_URL}/api/settings/`)
             .then(res => res.json())
             .then(data => setSettings(data))
             .catch(console.error);
             
-        fetch('http://localhost:8000/api/invoices/')
+        fetch(`${API_URL}/api/invoices/`)
             .then(res => res.json())
             .then(data => {
                 const sorted = [...data].sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
@@ -39,7 +40,7 @@ const InvoicesList = () => {
 
     const handleStatusChange = async (invoiceId, newStatus) => {
         try {
-            const res = await fetch(`http://localhost:8000/api/invoices/${invoiceId}/status`, {
+            const res = await fetch(`${API_URL}/api/invoices/${invoiceId}/status`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })
@@ -412,3 +413,6 @@ const InvoicesList = () => {
 };
 
 export default InvoicesList;
+
+
+

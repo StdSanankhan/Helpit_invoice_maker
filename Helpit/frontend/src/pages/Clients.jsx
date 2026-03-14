@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { Users, Plus, Mail, Phone, MapPin, Building, Trash2, Edit2, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -10,7 +11,7 @@ const Clients = () => {
 
     const fetchClients = () => {
         setLoading(true);
-        fetch('http://localhost:8000/api/clients/')
+        fetch(`${API_URL}/api/clients/`)
             .then(res => res.json())
             .then(data => {
                 setClients(data);
@@ -36,8 +37,8 @@ const Clients = () => {
         e.preventDefault();
         const isEditing = !!currentClient.id;
         const url = isEditing 
-            ? `http://localhost:8000/api/clients/${currentClient.id}`
-            : 'http://localhost:8000/api/clients/';
+            ? `${API_URL}/api/clients/${currentClient.id}`
+            : `${API_URL}/api/clients/`;
         const method = isEditing ? 'PUT' : 'POST';
 
         const loadingToast = toast.loading(`${isEditing ? 'Updating' : 'Adding'} client...`);
@@ -64,7 +65,7 @@ const Clients = () => {
         if (!window.confirm("Are you sure you want to delete this client?")) return;
         const toastId = toast.loading("Deleting client...");
         try {
-            const res = await fetch(`http://localhost:8000/api/clients/${id}`, { method: 'DELETE' });
+            const res = await fetch(`${API_URL}/api/clients/${id}`, { method: 'DELETE' });
             if (res.ok) {
                 toast.success("Client deleted", { id: toastId });
                 fetchClients();
@@ -197,3 +198,6 @@ const Clients = () => {
 };
 
 export default Clients;
+
+
+

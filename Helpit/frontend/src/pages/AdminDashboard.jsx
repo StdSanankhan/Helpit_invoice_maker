@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { Users, DollarSign, Activity, FileText, CheckCircle, XCircle, Clock, Search, ShieldAlert, AlertCircle, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -13,9 +14,9 @@ const AdminDashboard = () => {
         setIsLoading(true);
         try {
             const [analyticsRes, usersRes, paymentsRes] = await Promise.all([
-                fetch('http://localhost:8000/api/admin/analytics').then(r => r.json()),
-                fetch('http://localhost:8000/api/admin/users').then(r => r.json()),
-                fetch('http://localhost:8000/api/admin/payments/pending').then(r => r.json())
+                fetch(`${API_URL}/api/admin/analytics`).then(r => r.json()),
+                fetch(`${API_URL}/api/admin/users`).then(r => r.json()),
+                fetch(`${API_URL}/api/admin/payments/pending`).then(r => r.json())
             ]);
             
             setAnalytics(analyticsRes);
@@ -38,7 +39,7 @@ const AdminDashboard = () => {
 
         const toastId = toast.loading(`Processing payment ${action}...`);
         try {
-            const res = await fetch(`http://localhost:8000/api/admin/payments/${paymentId}/${action}`, {
+            const res = await fetch(`${API_URL}/api/admin/payments/${paymentId}/${action}`, {
                 method: 'POST'
             });
 
@@ -211,13 +212,13 @@ const AdminDashboard = () => {
                                         <div className="shrink-0 max-w-xs w-full bg-white/5 p-3 rounded-xl border border-white/10">
                                             <div className="text-xs text-gray-400 uppercase tracking-widest mb-2 font-semibold">Payment Proof</div>
                                             <a 
-                                                href={`http://localhost:8000/api/admin/proof/${p.payment_proof}`}
+                                                href={`${API_URL}/api/admin/proof/${p.payment_proof}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="block group"
                                             >
                                                 <img 
-                                                    src={`http://localhost:8000/api/admin/proof/${p.payment_proof}`}
+                                                    src={`${API_URL}/api/admin/proof/${p.payment_proof}`}
                                                     alt="Payment proof"
                                                     className="w-full h-24 object-cover rounded-lg border border-white/10 group-hover:border-primary/30 transition-colors"
                                                     onError={e => { e.target.onerror=null; e.target.style.display='none'; }}
@@ -253,3 +254,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+
+

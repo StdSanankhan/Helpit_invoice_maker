@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { TrendingUp, FileText, CheckCircle, Clock } from 'lucide-react';
@@ -7,7 +8,7 @@ const Reports = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/invoices/')
+        fetch(`${API_URL}/api/invoices/`)
             .then(res => res.json())
             .then(data => {
                 // Process data for charts
@@ -180,3 +181,6 @@ const Reports = () => {
 };
 
 export default Reports;
+
+
+

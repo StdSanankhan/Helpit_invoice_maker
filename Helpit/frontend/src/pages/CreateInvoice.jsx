@@ -1,3 +1,4 @@
+import { API_URL } from '../config/api';
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, FileText, Download, Send, Save, CheckCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -28,7 +29,7 @@ const CreateInvoice = () => {
 
     useEffect(() => {
         // Fetch Settings
-        fetch('http://localhost:8000/api/settings/')
+        fetch(`${API_URL}/api/settings/`)
             .then(res => res.json())
             .then(data => {
                 setSettings(data);
@@ -53,13 +54,13 @@ const CreateInvoice = () => {
             .catch(console.error);
             
         // Fetch Clients
-        fetch('http://localhost:8000/api/clients/')
+        fetch(`${API_URL}/api/clients/`)
             .then(res => res.json())
             .then(data => setClients(data))
             .catch(console.error);
 
         // Fetch user subscription plan
-        fetch('http://localhost:8000/api/subscriptions/status')
+        fetch(`${API_URL}/api/subscriptions/status`)
             .then(res => res.json())
             .then(data => { if (data?.plan) setUserPlan(data.plan); })
             .catch(console.error);
@@ -122,7 +123,7 @@ const CreateInvoice = () => {
         const toastId = toast.loading('Saving invoice...');
         try {
             const payload = { ...invoice, total: grandTotal };
-            const res = await fetch('http://localhost:8000/api/invoices/', {
+            const res = await fetch(`${API_URL}/api/invoices/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -209,7 +210,7 @@ const CreateInvoice = () => {
                 pdf_base64: base64PdfUrl
             };
 
-            const res = await fetch('http://localhost:8000/api/invoices/send-email', {
+            const res = await fetch(`${API_URL}/api/invoices/send-email`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -575,3 +576,6 @@ const CreateInvoice = () => {
 };
 
 export default CreateInvoice;
+
+
+
