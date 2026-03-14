@@ -74,7 +74,16 @@ const Upgrade = () => {
 
     try {
       const res = await fetch(`${API_URL}/api/subscriptions/upgrade`, { method: 'POST', body: form });
-      const data = await res.json();
+      
+      let data = {};
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        console.error("Non-JSON response:", text.substring(0, 200));
+      }
+
       if (res.ok) {
         toast.success(data.message || "Request submitted! Pending admin approval.", { id: toastId, duration: 6000 });
         setProof(null);
@@ -82,8 +91,9 @@ const Upgrade = () => {
         const fi = document.getElementById('proof_upload');
         if (fi) fi.value = '';
       } else {
-        toast.error(`${res.status}: ${data.detail || "Failed to submit request."}`, { id: toastId });
-        console.error("Upgrade error:", data);
+        const errMsg = data.detail || `Server Error (${res.status})`;
+        toast.error(`${res.status}: ${errMsg}`, { id: toastId });
+        console.error("Upgrade error:", data || res.status);
       }
     } catch (err) {
       toast.error(`Network error: ${err.message}`, { id: toastId });
