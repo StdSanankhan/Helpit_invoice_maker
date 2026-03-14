@@ -28,3 +28,7 @@ app.include_router(subscriptions.router, prefix="/api/subscriptions", tags=["sub
 @app.get("/")
 def read_root():
     return {"status": "ok", "message": "Helpit API running"}
+
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok", "routes": [route.path for route in app.routes]}

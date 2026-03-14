@@ -82,10 +82,12 @@ const Upgrade = () => {
         const fi = document.getElementById('proof_upload');
         if (fi) fi.value = '';
       } else {
-        toast.error(data.detail || "Failed to submit request.", { id: toastId });
+        toast.error(`${res.status}: ${data.detail || "Failed to submit request."}`, { id: toastId });
+        console.error("Upgrade error:", data);
       }
-    } catch {
-      toast.error("Network error. Please try again.", { id: toastId });
+    } catch (err) {
+      toast.error(`Network error: ${err.message}`, { id: toastId });
+      console.error("Fetch error:", err);
     } finally {
       setIsSubmitting(false);
     }
