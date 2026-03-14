@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.endpoints import settings, invoices, clients, admin, subscriptions
+from .core.database import engine, Base
 
 app = FastAPI(title="Helpit API", description="Backend for Helpit SaaS")
 
@@ -11,6 +12,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+async def startup():
+    """Auto-create all DB tables on startup if they don't exist."""
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 app.include_router(settings.router, prefix="/api/settings", tags=["settings"])
 app.include_router(invoices.router, prefix="/api/invoices", tags=["invoices"])

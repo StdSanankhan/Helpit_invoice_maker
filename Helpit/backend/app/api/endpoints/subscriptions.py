@@ -11,7 +11,9 @@ from app.models.models import User, Payment
 
 router = APIRouter()
 
-UPLOAD_DIR = "app/data/proofs"
+# Absolute path so it works regardless of where uvicorn is launched from
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+UPLOAD_DIR = os.path.join(BASE_DIR, "app", "data", "proofs")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Placeholder for real auth dependency — always returns first user

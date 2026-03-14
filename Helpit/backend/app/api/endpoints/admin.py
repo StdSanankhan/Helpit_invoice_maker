@@ -12,7 +12,9 @@ from app.models.models import User, Business, Invoice, Subscription, Payment
 
 router = APIRouter()
 
-PROOF_DIR = "app/data/proofs"
+# Absolute path so it works regardless of where uvicorn is launched from
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+PROOF_DIR = os.path.join(BASE_DIR, "app", "data", "proofs")
 os.makedirs(PROOF_DIR, exist_ok=True)
 
 # Placeholder admin auth dependency
