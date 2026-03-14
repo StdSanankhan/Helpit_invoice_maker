@@ -3,7 +3,9 @@
  * In development: reads from .env (VITE_API_URL=http://localhost:8000)
  * In production:  reads from Vercel environment variables
  */
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Strip trailing slash if present to avoid double-slashes in paths
+const rawUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+export const API_URL = rawUrl.endsWith('/') ? rawUrl.slice(0, -1) : rawUrl;
 
 const isProduction = window.location.hostname !== 'localhost' && !window.location.hostname.includes('127.0.0.1');
 
