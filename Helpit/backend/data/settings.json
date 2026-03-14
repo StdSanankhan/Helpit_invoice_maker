@@ -1,0 +1,13 @@
+{
+    "business_name": "Test Business",
+    "business_email": "sanankhan57431@gmail.com",
+    "business_logo": "logo_480f3186066e4317ba853029eedfc703.png",
+    "business_phone": "",
+    "business_address": "",
+    "business_tax_number": "",
+    "default_terms": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "stdsanankhan@gmail.com",
+    "smtp_password": "gsfj yyeh rutv aupr"
+}

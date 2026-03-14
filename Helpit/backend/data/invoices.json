@@ -1,0 +1,238 @@
+[
+    {
+        "id": "c1130932-4671-45be-be33-6c5d71dce9f0",
+        "client_name": "Test Client",
+        "client_email": "test@test.com",
+        "items": [
+            {
+                "description": "Service",
+                "quantity": 11.0,
+                "price": 100.0,
+                "tax_rate": 0.0
+            }
+        ],
+        "total": 1100.0,
+        "due_date": "",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n\n\n\n",
+        "status": "draft",
+        "created_at": "2026-03-11T15:15:21.165539"
+    },
+    {
+        "id": "3577e7e6-e3da-4800-aa9f-74a778ec1164",
+        "client_name": "Test Client",
+        "client_email": "test@test.com",
+        "items": [
+            {
+                "description": "Service",
+                "quantity": 11.0,
+                "price": 100.0,
+                "tax_rate": 0.0
+            }
+        ],
+        "total": 1100.0,
+        "due_date": "",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n\n\n\n",
+        "status": "draft",
+        "created_at": "2026-03-11T15:18:38.585491"
+    },
+    {
+        "id": "1d9b5df2-5039-4a3e-8ae0-d09c226c0ce6",
+        "client_name": "Acme Corp",
+        "client_email": "acme@corp.com",
+        "items": [
+            {
+                "description": "Consulting",
+                "quantity": 2.0,
+                "price": 500.0,
+                "tax_rate": 0.0
+            }
+        ],
+        "total": 1000.0,
+        "due_date": "",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "status": "draft",
+        "created_at": "2026-03-11T15:27:05.732370"
+    },
+    {
+        "id": "3b7a770f-bf40-4e4f-a53a-748f8dfddfb4",
+        "client_name": "Contractors ",
+        "client_email": "Contractor@email.com",
+        "items": [
+            {
+                "description": "engine Oil",
+                "quantity": 1.0,
+                "price": 0.0,
+                "tax_rate": 0.0
+            }
+        ],
+        "total": 0.0,
+        "due_date": "2026-03-06",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "status": "draft",
+        "created_at": "2026-03-11T15:31:03.170241"
+    },
+    {
+        "id": "2a114572-ac5d-4037-95bc-bfd4deee181a",
+        "client_name": "Test Client",
+        "client_email": "test@client.com",
+        "items": [
+            {
+                "description": "Test Item",
+                "quantity": 1.0,
+                "price": 100.0,
+                "tax_rate": 10.0
+            }
+        ],
+        "total": 110.00000000000001,
+        "due_date": "2024-12-31",
+        "notes": "",
+        "status": "draft",
+        "created_at": "2026-03-14T09:34:31.326306"
+    },
+    {
+        "id": "8eed88f8-1b22-436f-9ddb-2362531ad4d8",
+        "client_name": "Test Client",
+        "client_email": "test@client.com",
+        "items": [
+            {
+                "description": "Test Service",
+                "quantity": 1.0,
+                "price": 100.0,
+                "tax_rate": 10.0
+            }
+        ],
+        "total": 110.00000000000001,
+        "due_date": "",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "status": "draft",
+        "created_at": "2026-03-14T09:42:20.251473"
+    },
+    {
+        "id": "5e7eed30-0224-4e66-b3fe-48078f825ab6",
+        "client_name": "sun gulf",
+        "client_email": "Stdsanankhan@gmail.com",
+        "items": [
+            {
+                "description": "Engine oil",
+                "quantity": 1.0,
+                "price": 2000.0,
+                "tax_rate": 30.0
+            }
+        ],
+        "total": 2600.0,
+        "due_date": "2026-03-14",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "status": "draft",
+        "created_at": "2026-03-14T09:55:28.131565"
+    },
+    {
+        "id": "d0ae094b-92af-4d76-ade0-262b99e2cf05",
+        "invoice_number": "INV-2026-008",
+        "created_at": "2026-03-14T10:43:41.197583",
+        "client_id": "0374237b8f5e4525bf9d0b6141c72f7b",
+        "client_name": "Test Client",
+        "client_email": "test@example.com",
+        "due_date": "",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "items": [
+            {
+                "description": "web",
+                "quantity": 1,
+                "price": 233.0,
+                "tax_rate": 30.0
+            }
+        ],
+        "total": 302.90000000000003,
+        "discount": 0.0,
+        "status": "Paid",
+        "template_style": "modern"
+    },
+    {
+        "id": "7f6d3ff8-86fe-40bf-bb06-79e3131ddb38",
+        "invoice_number": "INV-2026-009",
+        "created_at": "2026-03-14T10:48:33.853253",
+        "client_id": "1eba094985d846cabaf7587e595e8560",
+        "client_name": "Shah fahad",
+        "client_email": "sanankhan7431@gmail.com",
+        "due_date": "2026-03-14",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "items": [
+            {
+                "description": "web",
+                "quantity": 1,
+                "price": 656.0,
+                "tax_rate": 3.0
+            }
+        ],
+        "total": 675.6800000000001,
+        "discount": 0.0,
+        "status": "Paid",
+        "template_style": "modern"
+    },
+    {
+        "id": "3b409bba-3bfc-4396-a1de-d65f29ad8ec3",
+        "invoice_number": "INV-2026-010",
+        "created_at": "2026-03-14T10:53:33.012611",
+        "client_id": "1eba094985d846cabaf7587e595e8560",
+        "client_name": "Shah fahad",
+        "client_email": "sanankhan57431@gmail.com",
+        "due_date": "2026-03-14",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "items": [
+            {
+                "description": "web",
+                "quantity": 1,
+                "price": 345.0,
+                "tax_rate": 4.0
+            }
+        ],
+        "total": 358.8,
+        "discount": 0.0,
+        "status": "Paid",
+        "template_style": "modern"
+    },
+    {
+        "id": "fa29d62b-0055-46bd-808e-fdc57de52c31",
+        "invoice_number": "INV-2026-011",
+        "created_at": "2026-03-14T11:17:25.045095",
+        "client_id": "7406f939a94f409dbd64678691028ef1",
+        "client_name": "Sanan",
+        "client_email": "sanankhan57431@gmail.com",
+        "due_date": "2026-03-14",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "items": [
+            {
+                "description": "web",
+                "quantity": 1,
+                "price": 43420.0,
+                "tax_rate": 20.0
+            }
+        ],
+        "total": 52102.0,
+        "discount": 2.0,
+        "status": "Draft",
+        "template_style": "modern"
+    },
+    {
+        "id": "20de58d2-d3a2-4e86-8bb8-77b755ebcd82",
+        "invoice_number": "INV-2026-012",
+        "created_at": "2026-03-14T11:19:19.169196",
+        "client_id": "7406f939a94f409dbd64678691028ef1",
+        "client_name": "Sanan",
+        "client_email": "sanankhan57431@gmail.com",
+        "due_date": "",
+        "notes": " TERMS & CONDITIONS\n1. INVOICE SUBMISSION REQUIREMENTS\n\n* PO Reference: Every invoice must clearly display the Aramco Purchase Order (PO) number and relevant line item numbers.\n* Supporting Documentation: All invoices for goods must include a signed Freight Bill or Bill of Lading. Service invoices must include signed Time Sheets or Service Entry Sheets (SES) approved by an authorized Aramco representative.\n* Separation: A separate invoice must be submitted for each individual shipment or milestone.\n* Itemization: Invoices must list the manufacturer\u2019s name, part numbers, unit prices, and extended totals exactly as they appear on the PO.\n\n2. PAYMENT TERMS\n\n* Standard Period: Payment is generally due 30 days from the date Aramco receives both a valid invoice and the corresponding goods or services.\n* Discount Period: Any \"Cash Discount\" periods begin only upon receipt of a correct and undisputed invoice at the designated accounts payable office.\n* Currency: Payment will be made in the currency specified in the PO. Conversion rates, if applicable, are determined by Aramco\u2019s corporate exchange policy.\n\n3. TAXES & WITHHOLDING\n\n* VAT/GST: Value Added Tax must be itemized separately. A valid Tax Invoice containing the vendor\u2019s Tax Registration Number (TRN) is mandatory for payment.\n* Withholding: Aramco reserves the right to withhold payments to cover any outstanding liens, uncorrected work, or failure by the vendor to provide required insurance or safety documentation.\n\n4. REIMBURSABLE EXPENSES\n\n* Receipts: Original receipts are required for all reimbursable expenses exceeding $25.00 (or local equivalent).\n* Pre-Approval: Only expenses explicitly authorized in the PO or Contract will be honored.\n\n5. RIGHT OF OFFSET\n\n* Aramco may deduct from any invoice any amounts the vendor owes to Aramco under the current agreement or any other contract.\n\n6. DISPUTED INVOICES\n\n* In the event of a discrepancy, Aramco will notify the vendor. The payment clock for the disputed portion is suspended until a corrected invoice is provided.\n",
+        "items": [
+            {
+                "description": "",
+                "quantity": 1,
+                "price": 34.0,
+                "tax_rate": 100.0
+            }
+        ],
+        "total": 68.0,
+        "discount": 0.0,
+        "status": "Paid",
+        "template_style": "modern"
+    }
+]
