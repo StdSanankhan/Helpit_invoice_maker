@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api.endpoints import settings, invoices, clients, admin, subscriptions
-from .core.database import engine, Base
+# Use absolute imports for better compatibility in production/Docker
+from app.api.endpoints import settings, invoices, clients, admin, subscriptions
+from app.core.database import engine, Base
 
 app = FastAPI(title="Helpit API", description="Backend for Helpit SaaS")
 
+# Allow all origins for production compatibility
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -31,4 +33,5 @@ def read_root():
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "ok", "routes": [route.path for route in app.routes]}
+    """Simple health check that does not require database connection."""
+    return {"status": "ok"}
