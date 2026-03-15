@@ -11,7 +11,12 @@ async def get_default_business(db: AsyncSession = Depends(get_db)) -> Business:
     business = result.scalars().first()
     if not business:
         # Create one fallback
-        new_user = User(email="fallback@helpit.com", is_admin=True, subscription_status="Premium")
+        new_user = User(
+            email="fallback@helpit.com", 
+            is_admin=True, 
+            plan="premium",
+            subscription_status="active"
+        )
         db.add(new_user)
         await db.flush()
         

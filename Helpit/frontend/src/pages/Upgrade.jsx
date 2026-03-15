@@ -49,10 +49,34 @@ const Upgrade = () => {
   const [qrError, setQrError] = useState({});
 
   useEffect(() => {
-    fetch(`${API_URL}/api/settings/`)
-      .then(res => res.json())
-      .then(data => { setSettings(data); setIsLoading(false); })
-      .catch(() => { toast.error("Failed to load payment settings."); setIsLoading(false); });
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/settings/`);
+        
+        let data = {};
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          data = await res.json();
+        } else {
+          const text = await res.text();
+          console.error("Settings fetch non-JSON:", text.substring(0, 200));
+        }
+
+        if (res.ok) {
+          setSettings(data);
+        } else {
+          toast.error(`Settings Error (${res.status})`);
+          console.error("Failed to load settings:", res.status, data);
+        }
+      } catch (err) {
+        toast.error("Network error loading settings.");
+        console.error("Settings fetch error:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchSettings();
   }, []);
 
   const handleFileChange = (e) => {

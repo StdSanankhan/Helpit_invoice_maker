@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/invoices" element={<InvoicesList />} />
-          <Route path="/invoices/new" element={<CreateInvoice />} />
+          <Route path="/create-invoice" element={<CreateInvoice />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/upgrade" element={<Upgrade />} />

@@ -7,11 +7,13 @@ from sqlalchemy.orm import declarative_base
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
-    if DATABASE_URL.startswith("postgres://"):
-        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
-    elif not DATABASE_URL.startswith("postgresql+asyncpg://"):
-        # For other postgres:// variations if they exist
-        DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+    # Use postgresql+asyncpg for SQLAlchemy async support
+    # Only replace if it doesn't already have the +asyncpg driver specified
+    if "postgresql+asyncpg" not in DATABASE_URL:
+        if DATABASE_URL.startswith("postgres://"):
+            DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif DATABASE_URL.startswith("postgresql://"):
+            DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 else:
     # Fallback to SQLite for local development if DATABASE_URL is missing
     DATABASE_URL = "sqlite+aiosqlite:///./helpit.db"

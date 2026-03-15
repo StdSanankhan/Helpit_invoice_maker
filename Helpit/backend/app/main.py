@@ -18,8 +18,14 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup():
     """Auto-create all DB tables on startup if they don't exist."""
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    print("Starting up Helpit API...")
+    try:
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        print("Database tables created successfully.")
+    except Exception as e:
+        print(f"CRITICAL: Failed to create database tables: {e}")
+        # We don't raise the error here so the app can still start and serve /api/health
 
 app.include_router(settings.router, prefix="/api/settings", tags=["settings"])
 app.include_router(invoices.router, prefix="/api/invoices", tags=["invoices"])

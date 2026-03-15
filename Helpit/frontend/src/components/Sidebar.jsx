@@ -7,10 +7,9 @@ const Sidebar = ({ closeSidebar }) => {
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
     { name: 'Clients', path: '/clients', icon: Users },
     { name: 'Invoices', path: '/invoices', icon: FileText },
-    { name: 'Create Invoice', path: '/invoices/new', icon: PlusCircle },
+    { name: 'Create Invoice', path: '/create-invoice', icon: PlusCircle },
     { name: 'Reports', path: '/reports', icon: BarChart2 },
     { name: 'Settings', path: '/settings', icon: Settings },
-    { name: 'Admin Portal', path: '/admin', icon: ShieldAlert },
   ];
 
   return (
