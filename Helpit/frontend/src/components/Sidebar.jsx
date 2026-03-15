@@ -28,6 +28,7 @@ const Sidebar = ({ closeSidebar }) => {
             <NavLink
               key={item.name}
               to={item.path}
+              end
               onClick={closeSidebar}
               className={({ isActive }) =>
                 `flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${
